@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Story</title>
+    <style>
+        :root {
+            --primary-red: #c9184a;
+            --soft-pink: #ffb3c1;
+            --deep-rose: #800e13;
+            --bg-cream: #fff0f3;
+            --card-white: rgba(255, 255, 255, 0.95);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Georgia', serif;
+            background: var(--bg-cream);
+            color: var(--deep-rose);
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 10;
+            gap: 40px;
+        }
+
+        /* Hero Text (Left Side) */
+        .hero-section {
+            flex: 1.2;
+            text-align: left;
+        }
+
+        .hanging-heart {
+            font-size: clamp(60px, 8vw, 120px);
+            color: #ff4d6d;
+            display: block;
+            margin-bottom: 10px;
+            animation: swing 4s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(-6deg); }
+            50% { transform: rotate(6deg); }
+        }
+
+        .hero-section h1 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin: 0;
+            color: var(--primary-red);
+            line-height: 1.2;
+        }
+
+        .hero-section .big-text {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: bold;
+            display: block;
+            color: var(--deep-rose);
+        }
+
+        /* Interaction Card (Right Side) */
+        .card {
+            background: var(--card-white);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(201, 24, 74, 0.12);
+            width: 100%;
+            max-width: 400px;
+            min-height: 450px;
+            text-align: center;
+            border: 1px solid var(--soft-pink);
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Inputs & Buttons */
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid var(--soft-pink);
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+
+        .btn-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        button {
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover { background: var(--deep-rose); transform: translateY(-2px); }
+
+        .back-link {
+            background: none;
+            color: var(--primary-red);
+            font-size: 0.85rem;
+            text-decoration: underline;
+            padding: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Memories Page Grid */
+        .memories-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .memory-box {
+            background: var(--bg-cream);
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            border: 1px dashed var(--primary-red);
+        }
+
+        /* Small Share Button */
+        .share-container {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+
+        .share-btn {
+            background: none;
+            border: 1px solid var(--soft-pink);
+            color: var(--soft-pink);
+            font-size: 0.7rem;
+            padding: 5px 10px;
+            border-radius: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .share-btn:hover { background: var(--soft-pink); color: white; border-color: var(--soft-pink); }
+
+        .heart-particle {
+            position: absolute;
+            animation: float 7s linear infinite;
+            color: var(--primary-red);
+            opacity: 0.4;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(110vh); opacity: 0; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
+
+        @media (max-width: 850px) {
+            .container { flex-direction: column; text-align: center; }
+            .hero-section { text-align: center; }
+            .card { max-width: 90%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="hearts"></div>
+
+    <div class="container">
+        <div class="hero-section">
+            <span class="hanging-heart">❤️</span>
+            <h1>Wishing you a</h1>
+            <span class="big-text">Happy Valentine's Day</span>
+            <p>To the one who holds the key to my heart.</p>
+        </div>
+
+        <div class="card">
+            
+            <div id="page0" class="page active">
+                <h2>Hello, Beautiful</h2>
+                <p>Please enter our secret code:</p>
+                <input type="text" id="username" placeholder="Your Nickname">
+                <input type="password" id="password" placeholder="Our Special Date">
+                <button onclick="login()">Open My Heart</button>
+            </div>
+
+            <div id="page1" class="page">
+                <h2>For You, <span id="userNameDisplay">Love</span></h2>
+                <p>"You make every day feel like Valentine's Day."</p>
+                <div class="btn-stack">
+                    <button onclick="showPage(2)">Read My Letter</button>
+                    <button class="back-link" onclick="showPage(0)">← Back to Login</button>
+                </div>
+            </div>
+
+            <div id="page2" class="page">
+                <h2>My Heartfelt Letter</h2>
+                <p style="text-align: left; font-size: 0.9rem;">
+                    Thank you for staying by my side. You've taught me what it means to be truly happy. 
+                    No matter where life takes us, my heart will always find its way back to you.
+                </p>
+                <div class="btn-stack">
+                    <button onclick="showPage(3)">View Our Memories</button>
+                    <button class="back-link" onclick="showPage(1)">← Back</button>
+                </div>
+            </div>
+
+            <div id="page3" class="page">
+                <h2>Special Memories</h2>
+                <div class="memories-grid">
+                    <div class="memory-box">Our First Date ✨</div>
+                    <div class="memory-box">That Long Talk 📞</div>
+                    <div class="memory-box">First Walk Together 🚶‍♂️</div>
+                    <div class="memory-box">Our Future Dreams 🏠</div>
+                </div>
+                <div class="btn-stack">
+                    <button onclick="showPage(4)">One Final Question</button>
+                    <button class="back-link" onclick="showPage(2)">← Back</button>
+                </div>
+            </div>
+
+            <div id="page4" class="page">
+                <h2>Forever?</h2>
+                <p>Will you be my Valentine forever?</p>
+                <div class="btn-stack">
+                    <button onclick="alert('Yay! ❤️ I love you!')">YES!</button>
+                    <button class="back-link" onclick="showPage(3)">← Back</button>
+                </div>
+                
+                <div class="share-container">
+                    <button class="share-btn" onclick="shareSite()">Share Love</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageNum) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page' + pageNum).classList.add('active');
+        }
+
+        function login() {
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value.trim();
+            if (user && pass) {
+                document.getElementById('userNameDisplay').textContent = user;
+                showPage(1);
+            } else {
+                alert('Please enter your details!');
+            }
+        }
+
+        function shareSite() {
+            const url = window.location.href;
+            if (navigator.share) {
+                navigator.share({ title: 'A Valentine Surprise', url: url });
+            } else {
+                navigator.clipboard.writeText(url);
+                alert('Link copied to share with your love! ❤️');
+            }
+        }
+
+        function createHeart() {
+            const container = document.getElementById('hearts');
+            const heart = document.createElement('div');
+            heart.className = 'heart-particle';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            container.appendChild(heart);
+            setTimeout(() => heart.remove(), 7000);
+        }
+
+        setInterval(createHeart, 400);
+    </script>
+</body>
+</html>
