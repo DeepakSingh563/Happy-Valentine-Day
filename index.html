@@ -234,9 +234,8 @@
     <footer>
         Made with ♥ by Ankit | <a href="mailto:kumarankit1731999@gmail.com">kumarankit1731999@gmail.com</a>
     </footer>
-
-    <script>
-        // 1. Background Particles (Hearts)
+<script>
+    // 1. Background Particles (Hearts)
         const canvas = document.getElementById('heart-canvas');
         const ctx = canvas.getContext('2d');
         let hearts = [];
@@ -298,20 +297,36 @@
             nextStage(4);
         }
 
-        // 3. The "No" Button Logic
+        // 3. The "No" Button Logic - FIXED FOR MOBILE
+        const noBtn = document.getElementById('no-btn');
+
+        // Added touchstart for mobile compatibility
+        noBtn.addEventListener('touchstart', function(e) {
+            e.preventDefault(); // Prevents the click from triggering
+            moveNo();
+        });
+
         function moveNo() {
             const btn = document.getElementById('no-btn');
-            const container = document.getElementById('btn-container');
             
-            const randomX = Math.floor(Math.random() * (window.innerWidth < 500 ? 200 : 300)) - 100;
-            const randomY = Math.floor(Math.random() * 200) - 100;
+            // Calculate boundaries to keep the button within the visible screen
+            const padding = 50;
+            const maxX = window.innerWidth - btn.offsetWidth - padding;
+            const maxY = window.innerHeight - btn.offsetHeight - padding;
 
+            // Generate random positions based on screen size instead of container
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            // Set position to fixed to move freely across the whole screen
+            btn.style.position = 'fixed';
             btn.style.left = randomX + 'px';
             btn.style.top = randomY + 'px';
         }
 
         window.addEventListener('resize', resize);
         init();
-    </script>
+</script>
 </body>
 </html>
+
